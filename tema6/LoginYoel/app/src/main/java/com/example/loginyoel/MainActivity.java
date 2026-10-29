@@ -1,5 +1,6 @@
 package com.example.loginyoel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,12 +48,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (correo.equals("yoel@correo.com") && pass.equals("1234")) {
-                tvMensaje.setTextColor(getColor(R.color.verde));
-                if (swRecordar.isChecked()) {
-                    tvMensaje.setText(R.string.ok_recordar);
-                } else {
-                    tvMensaje.setText(R.string.ok);
-                }
+                Intent intent = new Intent(this, MenuActivity.class);
+                intent.putExtra(MenuActivity.EXTRA_CORREO, correo);
+                startActivity(intent);
+                finish();   // el login sale de la pila
             } else {
                 tvMensaje.setTextColor(getColor(R.color.rojo));
                 tvMensaje.setText(R.string.incorrecto);

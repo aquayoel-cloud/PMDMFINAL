@@ -1,6 +1,8 @@
 package com.example.loginyoel;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -35,5 +37,12 @@ public class MenuActivity extends AppCompatActivity {
         String correo = getIntent().getStringExtra(EXTRA_CORREO);
         TextView tvSaludo = findViewById(R.id.tvSaludo);
         tvSaludo.setText(getString(R.string.Saludo, correo));
+
+        // Cerrar sesión: vuelve al login y cierra el menú
+        Button btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+        btnCerrarSesion.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
     }
 }
