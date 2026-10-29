@@ -12,4 +12,7 @@
     <string name="ok_recordar">Usuario y contraseña correctos. Almacenados para siguientes accesos</string>
     <string name="incorrecto">Usuario y/o contraseña incorrectos</string>
     <string name="demasiados">Demasiados intentos</string>
+    <string name="titulo.menu">Menu Principal</string>
+    <string name="saludo">hola</string>
+    <string name="cerrar.sesion">Cerrar Sesion</string>
 </resources>
