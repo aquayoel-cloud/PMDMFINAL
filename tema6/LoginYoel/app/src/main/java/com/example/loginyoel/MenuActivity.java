@@ -29,12 +29,11 @@ public class MenuActivity extends AppCompatActivity {
 
         // La MaterialToolbar pasa a ser la barra superior de la actividad
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle(R.string.titulo_menu); // evita que salga el nombre de la app
+        setSupportActionBar(toolbar);   // el título sale del android:label del Manifest
 
         // Saludo con el correo que llega del login
         String correo = getIntent().getStringExtra(EXTRA_CORREO);
         TextView tvSaludo = findViewById(R.id.tvSaludo);
-        tvSaludo.setText(getString(R.string.saludo)+ correo);
+        tvSaludo.setText(getString(R.string.Saludo, correo));
     }
 }

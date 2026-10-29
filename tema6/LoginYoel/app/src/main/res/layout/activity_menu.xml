@@ -13,11 +13,9 @@
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimaryContainer"
-        app:title="@string/titulo_menu"
-        app:titleTextColor="?attr/colorOnPrimaryContainer"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvSaludo"
@@ -25,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:textSize="20sp"
-        tools:text="Hola, diego@correo.com"
+        tools:text="Hola, yoel@correo.com"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -34,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:text="@string/cerrar_sesion"
+        android:text="@string/cerrar.sesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

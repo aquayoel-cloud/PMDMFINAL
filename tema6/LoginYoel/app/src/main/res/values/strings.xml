@@ -13,6 +13,11 @@
     <string name="incorrecto">Usuario y/o contraseña incorrectos</string>
     <string name="demasiados">Demasiados intentos</string>
     <string name="titulo.menu">Menu Principal</string>
-    <string name="saludo">hola</string>
+    <string name="Saludo">hola %1$s</string>
     <string name="cerrar.sesion">Cerrar Sesion</string>
+    <string name="correo.recoradar">Recordar correo</string>
+
+
+
+
 </resources>
