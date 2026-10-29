@@ -1,6 +1,7 @@
 package com.example.loginyoel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;   // EJ2
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SharedPreferences prefs;   // EJ2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
         Button btnContinuar = findViewById(R.id.btnContinuar);
         TextView tvMensaje = findViewById(R.id.tvMensaje);
 
+        // EJ2: abrir las preferencias y rellenar el correo si hay uno guardado
+        prefs = getSharedPreferences("sesion", MODE_PRIVATE);
+        String guardado = prefs.getString("correo", "");
+        if (!guardado.isEmpty()) {
+            etCorreo.setText(guardado);
+            swRecordar.setChecked(true);
+            etPass.requestFocus();
+        }
+
         btnContinuar.setOnClickListener(v -> {
             String correo = etCorreo.getText().toString();
             String pass = etPass.getText().toString();
@@ -48,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (correo.equals("yoel@correo.com") && pass.equals("1234")) {
+                // EJ2: guardar o borrar el correo según el interruptor
+                if (swRecordar.isChecked()) {
+                    prefs.edit().putString("correo", correo).apply();
+                } else {
+                    prefs.edit().remove("correo").apply();
+                }
+
                 Intent intent = new Intent(this, MenuActivity.class);
                 intent.putExtra(MenuActivity.EXTRA_CORREO, correo);
                 startActivity(intent);
