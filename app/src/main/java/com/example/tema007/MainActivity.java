@@ -1,8 +1,5 @@
 package com.example.tema007;
 
-
-
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ExoPlayer player;
     private Button btnPlay, btnPausa;
-
     private SeekBar seekBar;
     private TextView tvActual, tvTotal;
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -37,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             long pos = player.getCurrentPosition();
             seekBar.setProgress((int) pos);
             tvActual.setText(formatear(pos));
-            handler.postDelayed(this, 500);
+            handler.postDelayed(this, 500); // se repite cada medio segundo
         }
     };
 
@@ -59,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnPlay = findViewById(R.id.btnPlay);
         btnPausa = findViewById(R.id.btnPausa);
-
         seekBar = findViewById(R.id.seekBar);
         tvActual = findViewById(R.id.tvActual);
         tvTotal = findViewById(R.id.tvTotal);
 
+        // Crear el ExoPlayer con la canción de res/raw y prepararlo
         player = new ExoPlayer.Builder(this).build();
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cancion);
         player.setMediaItem(MediaItem.fromUri(uri));
@@ -103,7 +99,26 @@ public class MainActivity extends AppCompatActivity {
                 player.seekTo(sb.getProgress());
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        handler.removeCallbacks(actualizar);
         handler.post(actualizar);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        player.pause();
+        handler.removeCallbacks(actualizar);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        player.release();
+      
     }
 }
