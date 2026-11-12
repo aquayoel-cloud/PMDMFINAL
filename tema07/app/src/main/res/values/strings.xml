@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Reproductor de Yoel</string>
+    <string name="cancion_titulo">Título de tu canción · Autor</string>
+    <string name="tiempo_inicial">00:00</string>
+    <string name="play">Play</string>
+    <string name="pausa">Pausa</string>
+    <string name="efectos_titulo">Efectos de sonido</string>
+    <string name="efecto1">Aplauso</string>
+    <string name="efecto2">Campana</string>
+    <string name="efecto3">Láser</string>
+    <string name="efecto4">Moneda</string>
+</resources>
