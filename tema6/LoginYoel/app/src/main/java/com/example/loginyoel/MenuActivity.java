@@ -1,6 +1,8 @@
 package com.example.loginyoel;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -29,12 +31,18 @@ public class MenuActivity extends AppCompatActivity {
 
         // La MaterialToolbar pasa a ser la barra superior de la actividad
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle(R.string.titulo_menu); // evita que salga el nombre de la app
+        setSupportActionBar(toolbar);   // el título sale del android:label del Manifest
 
         // Saludo con el correo que llega del login
         String correo = getIntent().getStringExtra(EXTRA_CORREO);
         TextView tvSaludo = findViewById(R.id.tvSaludo);
-        tvSaludo.setText(getString(R.string.saludo)+ correo);
+        tvSaludo.setText(getString(R.string.Saludo, correo));
+
+        // Cerrar sesión: vuelve al login y cierra el menú
+        Button btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+        btnCerrarSesion.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
     }
 }
