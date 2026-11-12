@@ -78,6 +78,67 @@
         android:text="@string/pausa"
         app:layout_constraintTop_toTopOf="@id/btnPlay"
         app:layout_constraintStart_toEndOf="@id/btnPlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <TextView
+        android:id="@+id/tvEfectos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/efectos_titulo"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/btnPlay"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <GridLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:columnCount="2"
+        app:layout_constraintTop_toBottomOf="@id/tvEfectos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnEf1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:enabled="false"
+            android:text="@string/efecto1" />
+
+        <Button
+            android:id="@+id/btnEf2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:enabled="false"
+            android:text="@string/efecto2" />
+
+        <Button
+            android:id="@+id/btnEf3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:enabled="false"
+            android:text="@string/efecto3" />
+
+        <Button
+            android:id="@+id/btnEf4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:enabled="false"
+            android:text="@string/efecto4" />
+    </GridLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

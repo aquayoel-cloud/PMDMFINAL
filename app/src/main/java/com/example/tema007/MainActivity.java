@@ -1,5 +1,8 @@
 package com.example.tema007;
 
+
+import android.media.AudioAttributes;
+import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,13 +30,17 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvActual, tvTotal;
     private final Handler handler = new Handler(Looper.getMainLooper());
 
+    private SoundPool soundPool;
+    private final int[] sonidos = new int[4];
+    private int cargados = 0;
+
     private final Runnable actualizar = new Runnable() {
         @Override
         public void run() {
             long pos = player.getCurrentPosition();
             seekBar.setProgress((int) pos);
             tvActual.setText(formatear(pos));
-            handler.postDelayed(this, 500); // se repite cada medio segundo
+            handler.postDelayed(this, 500);
         }
     };
 
@@ -59,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         tvActual = findViewById(R.id.tvActual);
         tvTotal = findViewById(R.id.tvTotal);
 
-        // Crear el ExoPlayer con la canción de res/raw y prepararlo
         player = new ExoPlayer.Builder(this).build();
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cancion);
         player.setMediaItem(MediaItem.fromUri(uri));
@@ -73,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnPausa.setOnClickListener(v -> player.pause());
+
 
         player.addListener(new Player.Listener() {
             @Override
@@ -99,6 +106,41 @@ public class MainActivity extends AppCompatActivity {
                 player.seekTo(sb.getProgress());
             }
         });
+
+        Button btnEf1 = findViewById(R.id.btnEf1);
+        Button btnEf2 = findViewById(R.id.btnEf2);
+        Button btnEf3 = findViewById(R.id.btnEf3);
+        Button btnEf4 = findViewById(R.id.btnEf4);
+        Button[] botones = { btnEf1, btnEf2, btnEf3, btnEf4 };
+
+        AudioAttributes attrs = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(4)
+                .setAudioAttributes(attrs)
+                .build();
+
+
+        soundPool.setOnLoadCompleteListener((sp, sampleId, status) -> {
+            if (status == 0) {
+                cargados++;
+                if (cargados == 4) {
+                    for (Button b : botones) b.setEnabled(true);
+                }
+            }
+        });
+
+        sonidos[0] = soundPool.load(this, R.raw.aplauso, 1);
+        sonidos[1] = soundPool.load(this, R.raw.campana, 1);
+        sonidos[2] = soundPool.load(this, R.raw.laser, 1);
+        sonidos[3] = soundPool.load(this, R.raw.moneda, 1);
+
+        for (int i = 0; i < 4; i++) {
+            final int id = sonidos[i];
+            botones[i].setOnClickListener(v -> soundPool.play(id, 1f, 1f, 1, 0, 1f));
+        }
     }
 
     @Override
@@ -119,6 +161,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         player.release();
-      
+        soundPool.release();
     }
 }
